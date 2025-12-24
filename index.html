@@ -309,8 +309,8 @@
                     <p class="text-slate-500 text-sm mb-6">Invite 3 friends to unlock the <span class="text-femn-600 font-bold">Founding Member Badge + 500 Pinks</span> at launch.</p>
                     
                     <div class="flex gap-3 justify-center">
-                        <button class="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-80 transition">Share on X</button>
-                        <button class="bg-[#25D366] text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-80 transition">WhatsApp</button>
+                        <button id="share-x" class="bg-black text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-80 transition">Share on X</button>
+                        <button id="share-whatsapp" class="bg-[#25D366] text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-80 transition">WhatsApp</button>
                     </div>
                 </div>
             </div>
@@ -461,6 +461,31 @@
                     btn.disabled = false;
                 });
         });
+
+        // Social Sharing Logic
+        const shareBtnX = document.getElementById('share-x');
+        const shareBtnWhatsApp = document.getElementById('share-whatsapp');
+        
+        // Customize your message and link here
+        const shareContent = {
+            text: "I just joined the waitlist for Femn — the first digital ecosystem designed for women's safety and community. Secure your spot here:",
+            url: window.location.href // This automatically grabs your current website URL
+        };
+        
+        // Share on X (Twitter)
+        shareBtnX.addEventListener('click', () => {
+            const xUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareContent.text)}&url=${encodeURIComponent(shareContent.url)}`;
+            window.open(xUrl, '_blank');
+        });
+        
+        // Share on WhatsApp
+        shareBtnWhatsApp.addEventListener('click', () => {
+            // WhatsApp requires the text and URL to be in one string
+            const whatsappMessage = `${shareContent.text} ${shareContent.url}`;
+            const waUrl = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(waUrl, '_blank');
+        });
     </script>
 </body>
 </html>
+
